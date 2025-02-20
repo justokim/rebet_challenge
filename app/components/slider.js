@@ -43,8 +43,9 @@ const Slider = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-    //When user clicks down on the circle
+  //When user clicks down on the circle
   const handleMouseDown = (e) => {
+    e.preventDefault();
     setIsDragging(true); // Start dragging
     // Store the initial position
     startPosRef.current = e.clientX - position;
@@ -52,6 +53,8 @@ const Slider = () => {
 
   // When user moves mouse while holding down
   const handleMouseMove = (e) => {
+    e.preventDefault();
+
     if (!isDragging) return;
 
     const bounds = containerRef.current.getBoundingClientRect();
@@ -59,8 +62,8 @@ const Slider = () => {
     const containerCenter = (bounds.right + bounds.left) / 2;
     setIsLeftSide(newPosition < containerCenter);
 
-    const minPosition = bounds.left; 
-    const maxPosition = bounds.right; 
+    const minPosition = bounds.left;
+    const maxPosition = bounds.right;
 
     // Limit the position to the container's boundaries
     const limitedPosition = Math.min(
@@ -76,7 +79,7 @@ const Slider = () => {
     if (isDragging) {
       const bounds = containerRef.current.getBoundingClientRect();
 
-      // Check if we're at either end of the container 
+      // Check if we're at either end of the container
       if (position <= bounds.left + 5) {
         alert("Bet Declined");
         setPosition((bounds.right + bounds.left) / 2);
@@ -84,12 +87,11 @@ const Slider = () => {
         alert("Bet Accepted");
         setPosition((bounds.right + bounds.left) / 2);
       } else {
-        console.log("middle");
         const circle = containerRef.current.querySelector("[data-circle]");
         if (circle) {
-          circle.style.transition = "left 0.2s ease-out";
+          circle.style.transition = "left 0.2s ease-out   ";
           setPosition((bounds.right + bounds.left) / 2);
-          
+
           // Remove transition after animation completes
           setTimeout(() => {
             circle.style.transition = "";
