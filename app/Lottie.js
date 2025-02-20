@@ -1,5 +1,5 @@
 import Lottie from "lottie-react";
-import glowingCircle from "@/public/AnimatedAssets/glowing_circle.json";
+import glowingCircle from "@/public/AnimatedAssets/main_scene.json";
 import glowingLeftArrows from "@/public/AnimatedAssets/glowing_left_arrows.json";
 import glowingRightArrows from "@/public/AnimatedAssets/glowing_right_arrows.json";
 
